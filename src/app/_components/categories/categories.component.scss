@@ -1,0 +1,28 @@
+.card {
+  margin: 10px auto;
+}
+
+.action {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  & button {
+    width: 150px;
+  }
+}
+
+.category-wrapper {
+  margin-top: 20px;
+}
+
+.category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete {
+  color: red;
+  cursor: pointer;
+}

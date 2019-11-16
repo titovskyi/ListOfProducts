@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <div class="row new-list">
+    <mat-card class="card col-md-5 col-lg-5 col-xl-5">
+      <input
+        id="list-name"
+        #listName
+        class="form-control mb-4"
+        type="text"
+        placeholder="Название нового списка"
+      >
+
+      <input
+        id="product-name"
+        #productName
+        class="form-control mb-4"
+        type="text"
+        placeholder="Название продукта"
+      >
+      <button
+        mat-raised-button
+        (click)="addProduct()"
+      >
+        Добавить
+      </button>
+    </mat-card>
+    <mat-card class="card col-md-5 col-lg-5 col-xl-5 products-block">
+      <div *ngIf="products.length; else emptyProducts">
+        <p *ngFor="let prod of products">{{prod.name}}</p>
+      </div>
+      <ng-template #emptyProducts>Добавте новый продукт!</ng-template>
+    </mat-card>
+  </div>
+
+
+  <button mat-stroked-button color="primary" (click)="saveList()" class="action" [disabled]="!listName.value">Сохранить список</button>
+</div>

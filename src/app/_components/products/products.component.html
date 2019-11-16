@@ -1,0 +1,10 @@
+<mat-card class="col-md-6 col-lg-6 col-xl-6 card">
+  <div class="product-wrapper">
+    <div class="product" *ngFor="let product of products">
+      <p>{{product.name}}</p>
+      <i class="material-icons delete" (click)="removeProduct(product.id)">
+        delete
+      </i>
+    </div>
+  </div>
+</mat-card>

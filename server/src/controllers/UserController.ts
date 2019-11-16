@@ -8,6 +8,7 @@ class UserController {
 
   static listAll = async (req: Request, res: Response) => {
     // Get users from database
+
     const userRepository = getRepository(User);
     const users = await userRepository.find({
       select: ['id', 'username', 'role'] // We dont want to send the passwords on response
@@ -34,11 +35,11 @@ class UserController {
 
   static newUser = async (req: Request, res: Response) => {
     // Get parameters from the body
-    const {username, password, role} = req.body;
+    const {username, password} = req.body;
     const user = new User();
     user.username = username;
     user.password = password;
-    user.role = role;
+    user.role = 'User';
 
     // Validate if the parameters are ok
     const errors = await validate(user);

@@ -1,0 +1,6 @@
+<mat-card class="card col-md-5 col-lg-5 col-xl-5 products-block">
+  <div *ngIf="lists.length; else emptyProducts">
+    <p *ngFor="let list of lists">{{list.name}}</p>
+  </div>
+  <ng-template #emptyProducts>Добавте новый продукт!</ng-template>
+</mat-card>

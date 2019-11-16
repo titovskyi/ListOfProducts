@@ -1,0 +1,11 @@
+<div class="auth-form" [formGroup]="loginForm">
+  <mat-form-field class="input">
+    <input matInput placeholder="Введите ваш логин" formControlName="username">
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <input matInput placeholder="Введите пароль" formControlName="password">
+  </mat-form-field>
+
+  <button mat-raised-button (click)="onSubmit()" [disabled]="loginForm.invalid">Login</button>
+</div>

@@ -1,0 +1,21 @@
+<mat-card class="col-md-6 col-lg-6 col-xl-6 card">
+  <div class="action">
+    <input
+      id="list-name"
+      #categoryName
+      class="form-control"
+      type="text"
+      placeholder="Название нового списка"
+    >
+    <button mat-raised-button (click)="addCategory()">Добавить</button>
+  </div>
+
+  <div class="category-wrapper">
+    <div class="category" *ngFor="let category of categories">
+      <p>{{category.name}}</p>
+      <i class="material-icons delete" (click)="removeCategory(category.id)">
+        delete
+      </i>
+    </div>
+  </div>
+</mat-card>

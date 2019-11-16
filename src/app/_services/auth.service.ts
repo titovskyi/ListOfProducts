@@ -18,12 +18,15 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  getRole() {
-    return localStorage.getItem('role');
+  login(userData): Observable<User> {
+    console.log(userData);
+    return this.http.post<User>(`${environment.API.login}`, userData);
   }
 
-  login(userData): Observable<User> {
-    return this.http.post<User>(`${environment.API.login}`, userData);
+  signUp(userData): Observable<User> {
+    console.log(userData);
+
+    return this.http.post<User>(`${environment.API.signUp}`, userData);
   }
 
   getUser() {

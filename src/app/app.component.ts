@@ -5,13 +5,12 @@ import {AuthService} from './_services/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
   title = 'ngStarterWithAdmin';
   token: string;
-
-  headers = new HttpHeaders();
+  tabLoadTimes: Date[] = [];
 
   constructor(
     private http: HttpClient,
@@ -19,15 +18,8 @@ export class AppComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    this.authService.login({username: 'admin', password: 'admin'}).subscribe((res) => {
-      console.log(res.token);
-      localStorage.setItem('token', res.token);
-    });
-  }
-
-  onGetUsers() {
-    this.authService.getUser().subscribe((res) => {
-      console.log(res);
-    });
+    // this.authService.login({username: 'admin', password: 'admin'}).subscribe((res) => {
+    //   localStorage.setItem('token', res.token);
+    // });
   }
 }

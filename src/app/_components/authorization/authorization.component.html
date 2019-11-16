@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <div class="action-block">
+    <tabset [justified]="true">
+      <tab>
+        <ng-template tabHeading>
+          <span>Login</span>
+        </ng-template>
+        <app-login></app-login>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <span>SignUp</span>
+        </ng-template>
+        <app-sign-up (loginActive)="loginChange($event)"></app-sign-up>
+      </tab>
+    </tabset>
+
+  </div>
+</div>
