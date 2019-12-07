@@ -3,6 +3,8 @@ import {getRepository} from 'typeorm';
 import {validate} from 'class-validator';
 
 import {User} from '../entity/User';
+import * as jwt from 'jsonwebtoken';
+import config from '../config/config';
 
 class UserController {
 
@@ -11,7 +13,7 @@ class UserController {
 
     const userRepository = getRepository(User);
     const users = await userRepository.find({
-      select: ['id', 'username', 'role'] // We dont want to send the passwords on response
+      select: ['id', 'username'] // We dont want to send the passwords on response
     });
 
     // Send the users object
@@ -26,42 +28,11 @@ class UserController {
     const userRepository = getRepository(User);
     try {
       const user = await userRepository.findOneOrFail(id, {
-        select: ['id', 'username', 'role'] // We dont want to send the password on response
+        select: ['id', 'username'] // We dont want to send the password on response
       });
     } catch (error) {
       res.status(404).send('User not found');
     }
-  };
-
-  static newUser = async (req: Request, res: Response) => {
-    // Get parameters from the body
-    const {username, password} = req.body;
-    const user = new User();
-    user.username = username;
-    user.password = password;
-    user.role = 'User';
-
-    // Validate if the parameters are ok
-    const errors = await validate(user);
-    if (errors.length > 0) {
-      res.status(400).send(errors);
-      return;
-    }
-
-    // Hash the password, to securely store on DB
-    user.hashPassword();
-
-    // Try to save. If fails, the username is already in use
-    const userRepository = getRepository(User);
-    try {
-      await userRepository.save(user);
-    } catch (e) {
-      res.status(409).send('username already in use');
-      return;
-    }
-
-    // If all ok, send 201 response
-    res.status(201).send('User created');
   };
 
   static editUser = async (req: Request, res: Response) => {
@@ -69,7 +40,7 @@ class UserController {
     const id = req.params.id;
 
     // Get values from the body
-    const {username, role} = req.body;
+    const {username} = req.body;
 
     // Try to find user on database
     const userRepository = getRepository(User);
@@ -84,7 +55,7 @@ class UserController {
 
     // Validate the new values on model
     user.username = username;
-    user.role = role;
+
     const errors = await validate(user);
     if (errors.length > 0) {
       res.status(400).send(errors);

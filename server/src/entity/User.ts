@@ -10,10 +10,10 @@ import {Length, IsNotEmpty} from 'class-validator';
 import * as bcrypt from 'bcryptjs';
 import {List} from './List';
 import {Product} from './Product';
-import {Category} from "./Category";
+import {Category} from './Category';
 
 @Entity()
-@Unique(['username'])
+@Unique(['email'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -27,8 +27,12 @@ export class User {
   password: string;
 
   @Column()
-  @IsNotEmpty()
-  role: string;
+  email: string;
+
+  @Column({
+    nullable: true
+  })
+  token: string;
 
   @Column()
   @CreateDateColumn()

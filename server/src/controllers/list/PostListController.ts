@@ -12,14 +12,7 @@ export class PostListController {
 
     const userList = new List();
 
-    const savedProds = products.map((prod) => {
-      return PostListController.addProdutsArray(userId, prod);
-    });
-
     userList.name = listName;
-    userList.products = savedProds;
-    console.log(userList);
-
 
     const errors = await validate(userList);
     if (errors.length > 0) {
@@ -30,12 +23,21 @@ export class PostListController {
     const userRepository = getRepository(User);
     const user = await userRepository.findOne(userId, {relations: ['lists']});
     user.lists.push(userList);
-    await userRepository.save(user);
 
-    res.status(201).send('List created!');
-  }
+    try {
+      await userRepository.save(user);
+    } catch (err) {
+      return;
+    }
 
-  static addProdutsArray = async (userId, product) => {
+    products.map(async (prod) => {
+      await PostListController.addProdutsArray(userId, listName, prod, res);
+    });
+
+    res.status(200).send(user.lists);
+  };
+
+  static addProdutsArray = async (userId, listName, product, res) => {
 
     const newProduct = new Product();
     newProduct.name = product.name;
@@ -43,7 +45,7 @@ export class PostListController {
 
     const errors = await validate(newProduct);
     if (errors.length > 0) {
-      throw new Error('Щшибка при сохранении!');
+      throw new Error('Ошибка при сохранении!');
     }
 
     const userRepository = getRepository(User);
@@ -55,12 +57,25 @@ export class PostListController {
       currentUser.products.push(newProduct);
     }
 
+    const listRepository = getRepository(List);
+    const currentList = await listRepository.find({where: {name: listName}, relations: ['products']});
+    if (!productExist) {
+      currentList[0].products.push(newProduct);
+    } else {
+      currentList[0].products.push(productExist);
+    }
+
     try {
       await userRepository.save(currentUser);
     } catch (err) {
+      res.status(409).send('username already in use');
       return;
     }
-
-    return newProduct;
-  }
+    try {
+      await listRepository.save(currentList);
+    } catch (err) {
+      res.status(409).send('username already in use');
+      return;
+    }
+  };
 }

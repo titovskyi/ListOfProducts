@@ -8,7 +8,7 @@ import {ListService} from '../../_services/list.service';
   styleUrls: ['./all-lists.component.scss']
 })
 export class AllListsComponent implements OnInit {
-  private lists: List[] = [];
+  public lists: List[] = [];
 
   constructor(
     private listService: ListService
@@ -17,6 +17,18 @@ export class AllListsComponent implements OnInit {
   ngOnInit() {
     this.listService.getLists().subscribe((res: List[]) => {
       this.lists = res;
+    });
+  }
+
+  public showList(id) {
+    this.listService.getList(id).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  public removeList(id) {
+    this.listService.removeList(id).subscribe(() => {
+      this.lists = [...this.lists.filter((list) => list.id !== id)];
     });
   }
 

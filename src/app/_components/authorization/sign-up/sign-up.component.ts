@@ -47,14 +47,15 @@ export class SignUpComponent implements OnInit {
   // TODO response 201 catch by error. must be in result
   onSubmit() {
     this.authService.signUp(this.signUpForm.value).subscribe(
-      (res) => {
+      () => {
+        this.authService.login(this.signUpForm.value).subscribe((token) => {
+          console.log(token);
+          localStorage.setItem('token', token.token);
+          this.router.navigate(['lists']);
+        });
       },
       (err) => {
         console.log(err, 'err');
-        this.authService.login(this.signUpForm.value).subscribe((res) => {
-          localStorage.setItem('token', res.token);
-          this.router.navigate(['home']);
-        });
       });
   }
 

@@ -1,6 +1,14 @@
-<mat-card class="card col-md-5 col-lg-5 col-xl-5 products-block">
+<mat-card class="card col-md-5 col-lg-5 col-xl-5">
   <div *ngIf="lists.length; else emptyProducts">
-    <p *ngFor="let list of lists">{{list.name}}</p>
+    <div class="list" *ngFor="let list of lists">
+      <p (click)="showList(list.id)" class="list__name">{{list.name}}</p>
+      <i class="material-icons delete" (click)="removeList(list.id)">
+        delete
+      </i>
+    </div>
   </div>
-  <ng-template #emptyProducts>Добавте новый продукт!</ng-template>
+  <ng-template #emptyProducts>
+    <p>Создайте новый список</p>
+    <button mat-raised-button routerLink="/new-list" class="empty__button">Новый список</button>
+  </ng-template>
 </mat-card>

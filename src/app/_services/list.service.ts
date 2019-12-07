@@ -15,14 +15,23 @@ export class ListService {
   ) {
   }
 
-  getLists() {
+  public getLists() {
     return this.http.get<List[]>(`${environment.API.lists}`).pipe(
       map((lists) => lists.map((list) => new List(list.id, list.name)))
     );
   }
 
-  saveList(listName) {
-    return this.http.post<any>(`${environment.API.lists}`, listName);
+  public getList(listId) {
+    return this.http.get<any>(`${environment.API.lists}/${listId}`);
+  }
+
+  public saveList(listInfo) {
+    console.log(listInfo);
+    return this.http.post<any>(`${environment.API.lists}`, listInfo);
+  }
+
+  public removeList(listId) {
+    return this.http.delete(`${environment.API.lists}/${listId}`);
   }
 
 }

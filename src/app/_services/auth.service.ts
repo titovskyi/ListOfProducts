@@ -24,9 +24,11 @@ export class AuthService {
   }
 
   signUp(userData): Observable<User> {
-    console.log(userData);
-
     return this.http.post<User>(`${environment.API.signUp}`, userData);
+  }
+
+  checkToken() {
+    return this.http.get<User>(`${environment.API.login}`)
   }
 
   getUser() {

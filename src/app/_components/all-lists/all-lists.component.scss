@@ -1,0 +1,27 @@
+.card {
+  margin: 10px auto;
+  background-color: #2776f5;
+  color: #ffffff;
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__name {
+    cursor: pointer;
+  }
+}
+
+.delete {
+  color: red;
+  cursor: pointer;
+}
+
+.empty {
+  &__button {
+    margin-top: 20px;
+  }
+}

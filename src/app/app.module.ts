@@ -11,8 +11,8 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 
 import {NewListComponent} from './_components/new-list/new-list.component';
 import {MatButtonModule, MatIconModule, MatInputModule, MatCardModule} from '@angular/material';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
-import {HomeComponent} from './_components/home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthorizationComponent} from './_components/authorization/authorization.component';
 import {LoginComponent} from './_components/authorization/login/login.component';
@@ -20,18 +20,19 @@ import {SignUpComponent} from './_components/authorization/sign-up/sign-up.compo
 import {AllListsComponent} from './_components/all-lists/all-lists.component';
 import { CategoriesComponent } from './_components/categories/categories.component';
 import { ProductsComponent } from './_components/products/products.component';
+import { FriendsComponent } from './_components/friends/friends.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthorizationComponent,
-    HomeComponent,
     NewListComponent,
     LoginComponent,
     SignUpComponent,
     AllListsComponent,
     CategoriesComponent,
-    ProductsComponent
+    ProductsComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +45,7 @@ import { ProductsComponent } from './_components/products/products.component';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
+    MatAutocompleteModule,
     BrowserAnimationsModule,
     TabsModule.forRoot()
   ],

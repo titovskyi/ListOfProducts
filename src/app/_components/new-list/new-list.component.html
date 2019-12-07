@@ -1,9 +1,9 @@
-<div class="wrapper">
+<div class="container-fluid wrapper">
   <div class="row new-list">
-    <mat-card class="card col-md-5 col-lg-5 col-xl-5">
+    <mat-card class="col-sm-5 col-md-5 col-lg-5 col-xl-5 card" [formGroup]="productForm">
       <input
+        formControlName="listName"
         id="list-name"
-        #listName
         class="form-control mb-4"
         type="text"
         placeholder="Название нового списка"
@@ -11,11 +11,26 @@
 
       <input
         id="product-name"
-        #productName
+        formControlName="productName"
         class="form-control mb-4"
         type="text"
         placeholder="Название продукта"
+        [matAutocomplete]="autoProducts"
       >
+      <mat-autocomplete #autoProducts="matAutocomplete">
+        <mat-option *ngFor="let product of filteredProducts | async" [value]="product.name">
+          <span>{{product.name}}</span>
+        </mat-option>
+      </mat-autocomplete>
+
+      <input type="text" id="category-name" formControlName="categoryName" class="form-control mb-4" pattern="Категория"
+             [matAutocomplete]="autoCategories">
+      <mat-autocomplete #autoCategories="matAutocomplete">
+        <mat-option *ngFor="let category of filteredCategories | async" [value]="category.name">
+          <span>{{category.name}}</span>
+        </mat-option>
+      </mat-autocomplete>
+
       <button
         mat-raised-button
         (click)="addProduct()"
@@ -23,7 +38,7 @@
         Добавить
       </button>
     </mat-card>
-    <mat-card class="card col-md-5 col-lg-5 col-xl-5 products-block">
+    <mat-card class="col-sm-4 col-md-4 col-lg-4 col-xl-4 card products-block">
       <div *ngIf="products.length; else emptyProducts">
         <p *ngFor="let prod of products">{{prod.name}}</p>
       </div>
@@ -32,5 +47,7 @@
   </div>
 
 
-  <button mat-stroked-button color="primary" (click)="saveList()" class="action" [disabled]="!listName.value">Сохранить список</button>
+  <button mat-stroked-button color="primary" (click)="saveList()" class="action" [disabled]="!listName.value">Сохранить
+    список
+  </button>
 </div>

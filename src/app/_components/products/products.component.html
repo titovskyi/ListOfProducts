@@ -1,5 +1,5 @@
 <mat-card class="col-md-6 col-lg-6 col-xl-6 card">
-  <div class="product-wrapper">
+  <div class="product-wrapper" *ngIf="products.length; else emptyProducts">
     <div class="product" *ngFor="let product of products">
       <p>{{product.name}}</p>
       <i class="material-icons delete" (click)="removeProduct(product.id)">
@@ -7,4 +7,7 @@
       </i>
     </div>
   </div>
+  <ng-template #emptyProducts>
+    <p>Начните создавать списки и товары будут добавляться автоматически!</p>
+  </ng-template>
 </mat-card>

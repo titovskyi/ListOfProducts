@@ -10,7 +10,6 @@ class AuthController {
   static login = async (req: Request, res: Response) => {
     // Check if username and password are set
     const {username, password} = req.body;
-    console.log(username, password);
 
     if (!(username && password)) {
       res.status(400).send();
@@ -34,13 +33,20 @@ class AuthController {
     // Sing JWT, valid for 1 hour
     const jwtToken = jwt.sign(
       {userId: user.id, username: user.username},
-      config.jwtSecret,
-      {expiresIn: '1h'}
+      config.jwtSecret
     );
+
+    user.token = jwtToken;
+    const errors = await validate(user);
+    if (errors.length > 0) {
+      res.status(400).send(errors);
+      return;
+    }
+
+    await userRepository.save(user);
 
     // Send the jwt in the response
     res.send(JSON.stringify({
-      role: user.role,
       token: jwtToken
     }));
   };

@@ -23,7 +23,7 @@ export class AuthorizationComponent implements OnInit {
     const token = this.authService.getToken();
 
     if (token) {
-      this.router.navigate(['home']);
+      this.router.navigate(['lists']);
     }
   }
 

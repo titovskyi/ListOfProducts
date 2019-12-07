@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from './_services/auth.service';
+import {List} from './_models/list';
+import {ListService} from './_services/list.service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +20,6 @@ export class AppComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    // this.authService.login({username: 'admin', password: 'admin'}).subscribe((res) => {
-    //   localStorage.setItem('token', res.token);
-    // });
   }
+
 }

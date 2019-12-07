@@ -9,10 +9,8 @@ export class PostProductController {
   static post = async (req: Request, res: Response) => {
     const userId = res.locals.jwtPayload.userId;
     const {productName} = req.body;
-
-    console.log(productName, 'productName productName productName productName productName');
-
     const newProduct = new Product();
+
     newProduct.name = productName;
     newProduct.category = 'Какая-то';
 
