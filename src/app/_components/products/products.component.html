@@ -2,6 +2,7 @@
   <div class="product-wrapper" *ngIf="products.length; else emptyProducts">
     <div class="product" *ngFor="let product of products">
       <p>{{product.name}}</p>
+      <p>{{product.category}}</p>
       <i class="material-icons delete" (click)="removeProduct(product.id)">
         delete
       </i>

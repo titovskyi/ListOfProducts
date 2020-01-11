@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {List} from '../../_models/list';
-import {ListService} from '../../_services/list.service';
+import {List} from '../../../_models/list';
+import {ListService} from '../../../_services/list.service';
 
 @Component({
   selector: 'app-all-lists',
-  templateUrl: './all-lists.component.html',
-  styleUrls: ['./all-lists.component.scss']
+  templateUrl: './lists.component.html',
+  styleUrls: ['./lists.component.scss']
 })
-export class AllListsComponent implements OnInit {
+export class ListsComponent implements OnInit {
   public lists: List[] = [];
 
   constructor(

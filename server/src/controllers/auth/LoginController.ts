@@ -7,16 +7,17 @@ import {validate} from 'class-validator';
 
 export class LoginController {
   static login = async (req: Request, res: Response) => {
-    const {username, password} = req.body;
+    const {email, password} = req.body;
 
-    if (!(username && password)) {
+    if (!(email && password)) {
       res.status(400).send();
     }
 
     const userRepository = getRepository(User);
     let user: User;
+
     try {
-      user = await userRepository.findOneOrFail({where: {username}});
+      user = await userRepository.findOneOrFail({where: {email}});
     } catch (error) {
       res.status(401).send();
     }

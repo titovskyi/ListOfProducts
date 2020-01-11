@@ -9,7 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {TabsModule} from 'ngx-bootstrap/tabs';
 
-import {NewListComponent} from './_components/new-list/new-list.component';
+import {AddEditListComponent} from './_components/list/add-edit-list/add-edit-list.component';
 import {MatButtonModule, MatIconModule, MatInputModule, MatCardModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
@@ -17,7 +17,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AuthorizationComponent} from './_components/authorization/authorization.component';
 import {LoginComponent} from './_components/authorization/login/login.component';
 import {SignUpComponent} from './_components/authorization/sign-up/sign-up.component';
-import {AllListsComponent} from './_components/all-lists/all-lists.component';
+import {ListsComponent} from './_components/list/lists/lists.component';
 import { CategoriesComponent } from './_components/categories/categories.component';
 import { ProductsComponent } from './_components/products/products.component';
 import { FriendsComponent } from './_components/friends/friends.component';
@@ -26,10 +26,10 @@ import { FriendsComponent } from './_components/friends/friends.component';
   declarations: [
     AppComponent,
     AuthorizationComponent,
-    NewListComponent,
+    AddEditListComponent,
     LoginComponent,
     SignUpComponent,
-    AllListsComponent,
+    ListsComponent,
     CategoriesComponent,
     ProductsComponent,
     FriendsComponent

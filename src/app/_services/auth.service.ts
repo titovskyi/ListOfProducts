@@ -27,12 +27,12 @@ export class AuthService {
     return this.http.post<User>(`${environment.API.signUp}`, userData);
   }
 
-  checkToken() {
-    return this.http.get<User>(`${environment.API.login}`)
+  checkToken(token) {
+    return this.http.post<User | undefined>(`${environment.API.check}`, {token});
   }
 
   getUser() {
-    return this.http.get<User>(`${environment.API.user}`);
+    return this.http.get<User>(`${environment.API.check}`);
   }
 
 }

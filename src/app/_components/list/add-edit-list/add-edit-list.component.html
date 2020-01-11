@@ -4,15 +4,16 @@
       <input
         formControlName="listName"
         id="list-name"
-        class="form-control mb-4"
+        class="form-control mb-4 custom-input"
         type="text"
         placeholder="Название нового списка"
+        autocomplete="off"
       >
 
       <input
         id="product-name"
         formControlName="productName"
-        class="form-control mb-4"
+        class="form-control mb-4 custom-input"
         type="text"
         placeholder="Название продукта"
         [matAutocomplete]="autoProducts"
@@ -27,7 +28,7 @@
         type="text"
         id="category-name"
         formControlName="categoryName"
-        class="form-control mb-4"
+        class="form-control mb-4 custom-input"
         pattern="Категория"
         placeholder="Категория продукта"
         [matAutocomplete]="autoCategories"
@@ -41,6 +42,7 @@
       <button
         mat-raised-button
         (click)="addProduct()"
+        class="button_add-list"
       >
         Добавить
       </button>

@@ -12,6 +12,7 @@ createConnection()
     // Create a new express application instance
     const app = express();
 
+
     // Call midlewares
     app.use(cors());
     app.use(helmet());

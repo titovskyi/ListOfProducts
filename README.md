@@ -1,5 +1,5 @@
 <br>
-1. Check token, if exist in DB, else auth page
+1. if token exist in localstarage but not in server. redirect to auth page
 <br>
 2. List details && update list
 <br>
@@ -7,9 +7,11 @@
 <br>
 4. Add Friends, remove && share list
 <br>
+5. Add login to lowercase
 <br>
+6. Show Errors popup all errors
 <br>
-<br>
+7. Add categories to add-edit component
 <br>
 <br>
 <br>

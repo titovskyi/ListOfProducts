@@ -12,7 +12,8 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
 
-  public username: FormControl;
+  // public username: FormControl;
+  public email: FormControl;
   public password: FormControl;
 
   constructor(
@@ -36,11 +37,11 @@ export class LoginComponent implements OnInit {
   }
 
   private createForm() {
-    this.username = new FormControl('', Validators.required);
+    this.email = new FormControl('', Validators.required);
     this.password = new FormControl('', Validators.required);
 
     this.loginForm = new FormGroup({
-      username: this.username,
+      email: this.email,
       password: this.password
     });
   }

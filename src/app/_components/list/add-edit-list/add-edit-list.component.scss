@@ -24,11 +24,24 @@ button {
 }
 
 .card {
-  margin: 20px 50px;
+  margin: 1%;
   height: 500px;
-  background-color: #2776f5;
+  color: #ff9c00;
+  background-color: #000000; //#2776f5
 }
 
 .action {
   margin: 10px;
+}
+
+.button_add-list {
+  background-color: #ffcc00;
+}
+
+.custom-input {
+  background: #ffcc00;
+}
+
+input:-internal-autofill-selected {
+  background: transparent!important;
 }
