@@ -27,21 +27,22 @@ export class PostListController {
     try {
       await userRepository.save(user);
     } catch (err) {
+      res.status(409).send('Проблема с сервером!');
       return;
     }
 
     products.map(async (prod) => {
-      await PostListController.addProdutsArray(userId, listName, prod, res);
+      await PostListController.addProductsArray(userId, listName, prod, res);
     });
 
     res.status(200).send(user.lists);
   };
 
-  static addProdutsArray = async (userId, listName, product, res) => {
+  static addProductsArray = async (userId, listName, product, res) => {
 
     const newProduct = new Product();
     newProduct.name = product.name;
-    newProduct.category = 'Какая-то';
+    newProduct.category = product.category;
 
     const errors = await validate(newProduct);
     if (errors.length > 0) {
@@ -49,19 +50,20 @@ export class PostListController {
     }
 
     const userRepository = getRepository(User);
-    const currentUser = await userRepository.findOne(userId, {relations: ['products']});
+    const listRepository = getRepository(List);
+
+    const currentUser = await userRepository.findOne(userId, {relations: ['products', 'lists']});
+    const currentList = await listRepository.find({where: {name: listName}, relations: ['products']});
 
     const productExist = currentUser.products.find((prod) => prod.name === newProduct.name);
 
+
     if (!productExist) {
       currentUser.products.push(newProduct);
-    }
-
-    const listRepository = getRepository(List);
-    const currentList = await listRepository.find({where: {name: listName}, relations: ['products']});
-    if (!productExist) {
       currentList[0].products.push(newProduct);
     } else {
+      productExist.category = product.category;
+      currentUser.products.push(productExist);
       currentList[0].products.push(productExist);
     }
 

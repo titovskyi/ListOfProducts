@@ -4,7 +4,6 @@ import {User} from './User';
 import {Product} from './Product';
 
 @Entity()
-@Unique(['name'])
 export class List {
   @PrimaryGeneratedColumn()
   id: number;

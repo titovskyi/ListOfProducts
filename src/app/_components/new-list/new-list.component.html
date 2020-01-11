@@ -1,5 +1,5 @@
 <div class="container-fluid wrapper">
-  <div class="row new-list">
+  <div class="row new-list d-flex justify-content-center">
     <mat-card class="col-sm-5 col-md-5 col-lg-5 col-xl-5 card" [formGroup]="productForm">
       <input
         formControlName="listName"
@@ -17,14 +17,21 @@
         placeholder="Название продукта"
         [matAutocomplete]="autoProducts"
       >
-      <mat-autocomplete #autoProducts="matAutocomplete">
+      <mat-autocomplete #autoProducts="matAutocomplete" (optionSelected)='changeCategory($event.option.value)'>
         <mat-option *ngFor="let product of filteredProducts | async" [value]="product.name">
           <span>{{product.name}}</span>
         </mat-option>
       </mat-autocomplete>
 
-      <input type="text" id="category-name" formControlName="categoryName" class="form-control mb-4" pattern="Категория"
-             [matAutocomplete]="autoCategories">
+      <input
+        type="text"
+        id="category-name"
+        formControlName="categoryName"
+        class="form-control mb-4"
+        pattern="Категория"
+        placeholder="Категория продукта"
+        [matAutocomplete]="autoCategories"
+      >
       <mat-autocomplete #autoCategories="matAutocomplete">
         <mat-option *ngFor="let category of filteredCategories | async" [value]="category.name">
           <span>{{category.name}}</span>
@@ -38,15 +45,13 @@
         Добавить
       </button>
     </mat-card>
-    <mat-card class="col-sm-4 col-md-4 col-lg-4 col-xl-4 card products-block">
+    <mat-card class="col-sm-5 col-md-5 col-lg-5 col-xl-5 card products-block">
       <div *ngIf="products.length; else emptyProducts">
         <p *ngFor="let prod of products">{{prod.name}}</p>
       </div>
       <ng-template #emptyProducts>Добавте новый продукт!</ng-template>
     </mat-card>
   </div>
-
-
   <button mat-stroked-button color="primary" (click)="saveList()" class="action" [disabled]="!listName.value">Сохранить
     список
   </button>

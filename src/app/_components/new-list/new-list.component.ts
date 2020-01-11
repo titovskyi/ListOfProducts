@@ -31,6 +31,8 @@ export class NewListComponent implements OnInit {
 
   categoryName = new FormControl('');
 
+  currentCategory: any = null;
+
   filteredProducts: Observable<Product[]>;
 
   filteredCategories: Observable<Category[]>;
@@ -51,6 +53,7 @@ export class NewListComponent implements OnInit {
         startWith(''),
         map(product => product ? this._filterProducts(product, this.userProducts) : this.userProducts.slice())
       );
+
 
     this.filteredCategories = this.categoryName.valueChanges
       .pipe(
@@ -73,7 +76,7 @@ export class NewListComponent implements OnInit {
     const prodNameExist = this.products.find((prod) => prod.name === this.productName.value);
 
     if (!prodNameExist) {
-      this.products.push({id: null, name: this.productName.value});
+      this.products.push({id: null, name: this.productName.value, category: this.categoryName.value});
     }
 
     this.products.sort((a, b) => a.name.localeCompare(b.name));
@@ -86,8 +89,20 @@ export class NewListComponent implements OnInit {
     });
   }
 
+  changeCategory(productName) {
+    for(let i = 0; this.userProducts.length > i; i++) {
+      if (this.userProducts[i].name === productName) {
+        this.categoryName.setValue(this.userProducts[i].category);
+        break;
+      } else {
+        this.categoryName.setValue('Другое');
+      }
+    }
+  }
+
   private _filterProducts(value: string, filteredArray: any[]): Product[] {
     const filterValue = value.toLowerCase();
+    console.log(this.userProducts);
 
     return filteredArray.filter(state => state.name.toLowerCase().includes(filterValue));
   }

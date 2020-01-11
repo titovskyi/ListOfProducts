@@ -29,6 +29,7 @@ export class PostCategoryController {
 
     const userRepository = getRepository(User);
     const currentUser = await userRepository.findOne(userId, {relations: ['categories']});
+
     if (userCategory.id) {
       const categoryExist = currentUser.categories.find((category) => category.id === userCategory.id);
 

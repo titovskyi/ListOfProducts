@@ -17,7 +17,7 @@ export class ProductService {
 
   public getProducts(): Observable<Product[]> | null {
     return this.http.get(`${environment.API.products}`).pipe(
-      map((products: []) => products.map((product: Product) => new Product(product.id, product.name)))
+      map((products: []) => products.map((product: Product) => new Product(product.id, product.name, product.category)))
     );
   }
 

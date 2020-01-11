@@ -1,9 +1,19 @@
-Angular + Express + TypeOrm starter
-
-Jwt.interceptor intercept by token from localStorage.
-
-To start:
-1. npm i => in root folder
-2. npm run migration:run => in server forlder, to create a first user n db.
-3. npm start => in server folder? to start server on localhost:3000.
-4. ng serve => in root folder, to start angular on localhost:4200.
+<br>
+1. Check token, if exist in DB, else auth page
+<br>
+2. List details && update list
+<br>
+3. Product details && update product
+<br>
+4. Add Friends, remove && share list
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

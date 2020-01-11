@@ -9,12 +9,6 @@ export class DeleteProductController {
     const id = req.params.id;
     const userId = res.locals.jwtPayload.userId;
 
-    // await getConnection()
-    //   .createQueryBuilder()
-    //   .relation(User, 'products')
-    //   .of(userId)
-    //   .remove(id);
-
     let productUsage;
     const productRepository = getRepository(Product);
     try {
@@ -22,6 +16,7 @@ export class DeleteProductController {
     } catch (err) {
       res.status(404).send('Категория не найдена!');
     }
+
 
     if (!productUsage.lists.length) {
       console.log(!productUsage.lists.length, 'length == 0');
