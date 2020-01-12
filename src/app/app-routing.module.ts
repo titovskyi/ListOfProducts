@@ -11,7 +11,8 @@ import {CategoriesComponent} from './_components/categories/categories.component
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'lists'},
   {path: 'lists', component: ListsComponent, canActivate: [AuthGuardService]},
-  {path: 'add-edit-list', component: AddEditListComponent, canActivate: [AuthGuardService]},
+  {path: 'add-list', component: AddEditListComponent, canActivate: [AuthGuardService]},
+  {path: 'edit-list/:id', component: AddEditListComponent, canActivate: [AuthGuardService]},
   {path: 'products', component: ProductsComponent, canActivate: [AuthGuardService]},
   {path: 'friends', component: FriendsComponent, canActivate: [AuthGuardService]},
   {path: 'categories', component: CategoriesComponent, canActivate: [AuthGuardService]},

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {List} from '../../../_models/list';
 import {ListService} from '../../../_services/list.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-all-lists',
@@ -11,6 +12,7 @@ export class ListsComponent implements OnInit {
   public lists: List[] = [];
 
   constructor(
+    private router: Router,
     private listService: ListService
   ) { }
 
@@ -21,9 +23,8 @@ export class ListsComponent implements OnInit {
   }
 
   public showList(id) {
-    this.listService.getList(id).subscribe((res) => {
-      console.log(res);
-    });
+    this.router.navigate([`edit-list/${id}`]);
+
   }
 
   public removeList(id) {

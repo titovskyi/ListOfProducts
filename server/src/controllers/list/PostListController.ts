@@ -57,7 +57,6 @@ export class PostListController {
 
     const productExist = currentUser.products.find((prod) => prod.name === newProduct.name);
 
-
     if (!productExist) {
       currentUser.products.push(newProduct);
       currentList[0].products.push(newProduct);

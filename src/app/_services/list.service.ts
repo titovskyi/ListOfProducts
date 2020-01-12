@@ -26,8 +26,11 @@ export class ListService {
   }
 
   public saveList(listInfo) {
-    console.log(listInfo);
     return this.http.post<any>(`${environment.API.lists}`, listInfo);
+  }
+
+  public updateList(listId, listInfo) {
+    return this.http.put<any>(`${environment.API.lists}/${listId}`, listInfo);
   }
 
   public removeList(listId) {

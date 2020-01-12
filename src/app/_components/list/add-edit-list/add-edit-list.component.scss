@@ -14,9 +14,19 @@ button {
 
 .products-block {
   text-align: center;
-  color: #fff;
   overflow: scroll;
   scrollbar-width: none;
+
+  &_title {
+    color: #249e14;
+  }
+
+  &_text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ff9c00;
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -35,13 +45,14 @@ button {
 }
 
 .button_add-list {
-  background-color: #ffcc00;
+    background-color: #ffcc00;
 }
 
 .custom-input {
   background: #ffcc00;
 }
 
-input:-internal-autofill-selected {
-  background: transparent!important;
+.delete {
+  color: red;
+  cursor: pointer;
 }

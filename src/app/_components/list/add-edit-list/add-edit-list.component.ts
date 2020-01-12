@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CategoryService} from '../../../_services/category.service';
 import {Category} from '../../../_models/category';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-list-form',
@@ -23,6 +24,10 @@ export class AddEditListComponent implements OnInit {
 
   userCategories: Category[] = [];
 
+  productCategories: string[] = [];
+
+  editListId: any;
+
   productForm: FormGroup;
 
   listName = new FormControl('');
@@ -38,6 +43,7 @@ export class AddEditListComponent implements OnInit {
   filteredCategories: Observable<Category[]>;
 
   constructor(
+    private route: ActivatedRoute,
     private listService: ListService,
     private productService: ProductService,
     private categoryService: CategoryService
@@ -62,6 +68,17 @@ export class AddEditListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.editListId = this.route.snapshot.paramMap.get('id');
+    if (this.editListId) {
+      this.listService.getList(this.editListId).subscribe((res) => {
+        console.log(res.products);
+        this.products = res.products;
+        this.productCategories = [...new Set(this.products.map(item => item.category))];
+        this.listName.setValue(res.name);
+      });
+    }
+
+
     this.productService.getProducts().subscribe((res) => {
       this.userProducts = res;
     });
@@ -79,19 +96,29 @@ export class AddEditListComponent implements OnInit {
     }
 
     this.products.sort((a, b) => a.name.localeCompare(b.name));
-    const unique = [...new Set(this.products.map(item => item.category))];
-    console.log(unique);
+    this.productCategories = [...new Set(this.products.map(item => item.category))];
     this.productName.setValue('');
   }
 
+  getProductsByCategory(category): Product[] {
+    return this.products.filter((product) => product.category === category);
+  }
+
   saveList() {
-    this.listService.saveList({listName: this.listName.value, products: this.products}).subscribe(() => {
-      this.products = [];
-    });
+    if (this.editListId) {
+      this.listService.updateList(this.editListId, {listName: this.listName.value, products: this.products}).subscribe((res) => {
+        this.products = res;
+      });
+    } else {
+      this.listService.saveList({listName: this.listName.value, products: this.products}).subscribe(() => {
+        this.products = [];
+      });
+    }
+
   }
 
   changeCategory(productName) {
-    for(let i = 0; this.userProducts.length > i; i++) {
+    for (let i = 0; this.userProducts.length > i; i++) {
       if (this.userProducts[i].name === productName) {
         this.categoryName.setValue(this.userProducts[i].category);
         break;
@@ -101,9 +128,14 @@ export class AddEditListComponent implements OnInit {
     }
   }
 
+  deleteProduct(productName) {
+    const some = this.products.filter((product) => product.name !== productName);
+    this.products = [...some];
+    this.productCategories = [...new Set(this.products.map(item => item.category))];
+  }
+
   private _filterProducts(value: string, filteredArray: any[]): Product[] {
     const filterValue = value.toLowerCase();
-    console.log(this.userProducts);
 
     return filteredArray.filter(state => state.name.toLowerCase().includes(filterValue));
   }

@@ -16,7 +16,6 @@ export class CheckTokenController {
     } catch (error) {
       res.status(401).send();
     }
-    console.log(user, 'useruseruseruser');
     // Sing JWT
 
     // if (user) {

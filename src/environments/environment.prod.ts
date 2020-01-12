@@ -6,6 +6,7 @@ export const environment = {
     signUp: 'http://localhost:3000/user',
     user: 'http://localhost:3000/user',
     lists: 'http://localhost:3000/list',
+    updateList: 'http://localhost:3000/list',
     products: 'http://localhost:3000/product',
     category: 'http://localhost:3000/category'
   }
