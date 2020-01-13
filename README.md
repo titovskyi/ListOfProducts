@@ -13,7 +13,9 @@
 <br>
 7. Add categories to add-edit component
 <br>
+8. trim products, categories
 <br>
+9. Change auth style to yellow, red, green
 <br>
 <br>
 <br>

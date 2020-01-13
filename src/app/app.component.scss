@@ -1,4 +1,13 @@
 .header {
   margin: 0 auto;
   text-align: center;
+
+  & > button {
+    color: #495057;
+    outline: none;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
 }

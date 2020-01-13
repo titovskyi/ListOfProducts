@@ -114,7 +114,6 @@ export class AddEditListComponent implements OnInit {
         this.products = [];
       });
     }
-
   }
 
   changeCategory(productName) {
@@ -134,10 +133,13 @@ export class AddEditListComponent implements OnInit {
     this.productCategories = [...new Set(this.products.map(item => item.category))];
   }
 
+  // #############################################
+
   private _filterProducts(value: string, filteredArray: any[]): Product[] {
     const filterValue = value.toLowerCase();
 
     return filteredArray.filter(state => state.name.toLowerCase().includes(filterValue));
   }
 
+  // #############################################
 }
